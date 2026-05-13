@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="container admin-panel">
+
+    <h1>Admin Dashboard</h1>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for appointment in appointments %}
+
+        <tr>
+
+            <td>{{ appointment.id }}</td>
+
+            <td>{{ appointment.patient_name }}</td>
+
+            <td>{{ appointment.doctor_name }}</td>
+
+            <td>{{ appointment.appointment_date }}</td>
+
+            <td>{{ appointment.appointment_time }}</td>
+
+            <td>{{ appointment.status }}</td>
+
+            <td>
+
+                <a href="/approve/{{ appointment.id }}">
+                    Approve
+                </a>
+
+                <br><br>
+
+                <a href="/delete/{{ appointment.id }}">
+                    Delete
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <br><br>
+
+    <h2>Total Appointments Overview</h2>
+
+    <canvas id="myChart"></canvas>
+
+    <br><br>
+
+    <a href="/logout">
+        Logout
+    </a>
+
+</div>
+
+<script>
+
+const ctx = document.getElementById('myChart').getContext('2d');
+
+new Chart(ctx, {
+
+    type: 'bar',
+
+    data: {
+
+        labels: ['Appointments'],
+
+        datasets: [{
+
+            label: 'Total Appointments',
+
+            data: [{{ appointments|length }}],
+
+            borderWidth: 1,
+
+            backgroundColor: 'rgba(0, 119, 255, 0.7)'
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+</body>
+
+</html>

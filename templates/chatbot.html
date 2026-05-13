@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>AI Hospital Assistant</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>AI Hospital Assistant</h1>
+
+    <form method="POST">
+
+        <input
+        type="text"
+        name="message"
+        placeholder="Ask me anything..."
+        required>
+
+        <button type="submit">
+            Send
+        </button>
+
+    </form>
+
+    {% if response %}
+
+    <div class="typing-box">
+
+        <div class="bot-message">
+
+            <p class="typing">
+                {{ response }}
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+    <a href="/">Back Home</a>
+
+</div>
+
+</body>
+
+</html>
